@@ -1,0 +1,12 @@
+{
+  "name": "travel-go",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ASiCo1116/travel-go.git",
+  "author": "ASiCo1116 <b05611046@ntu.edu.tw>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd frontend && yarn start",
+    "server": "cd backend && yarn server"
+  }
+}
