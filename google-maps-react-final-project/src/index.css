@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1 {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #281414;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+.search {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+}
+
+.search input {
+  padding: 1.2rem;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+
+
+.locate {
+  position: absolute;
+  top: 4rem;
+  right: 0.8rem;
+  background: none;
+  border: none;
+  z-index: 10;
+}
+.locate img {
+  width: 30px;
+  cursor: pointer;
+}
+
+
+.clearsearch{
+  position: absolute;
+  top: 1.6rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  z-index: 10;
+}
+.clearsearch img {
+  width: 30px;
+  cursor: pointer;
+}
+
+
+.addtravel{
+  background: none;
+  border: none;
+  z-index: 10;
+}
+
+.addtravel img {
+  width: 30px;
+  cursor: pointer;
+  transform: rotate(45deg);
+}
+
+
