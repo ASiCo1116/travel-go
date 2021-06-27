@@ -67,6 +67,8 @@ const Sidebar = ({
   deleteOneSpot,
   reorderTravel,
   setTravel,
+  planName,
+  setPlanName
 }) => {
   // const [items, setItems] = useState([]);
 
@@ -142,7 +144,7 @@ const Sidebar = ({
       </div>
 
       <div className="flex items-center justify-center justify-evenly">
-        <Input placeholder="Plan name" />
+        <Input placeholder="Plan name" onChange={(e)=>{setPlanName(e.target.value)}} />
       </div>
 
       <div className="flex items-center justify-center">
@@ -166,7 +168,7 @@ const Sidebar = ({
                           <Avatar
                             shape="square"
                             size={100}
-                            src={item.photos[0].getUrl()}
+                            src={item.photoURL}
                           />
                         }
                         {"\n"}
@@ -199,8 +201,8 @@ const Sidebar = ({
           addToTravel={addToTravel}
         />
       </Drawer>
+        <div>{planName}</div>
 
-      
     </div>
   );
 };

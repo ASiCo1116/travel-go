@@ -13,13 +13,17 @@ function InnerCard({
   cardSpot,
   addToTravel,
   setCardSpot,
+  planName
 }) {
   const onClickAddTravel = () => {
     console.log("hi");
     console.log(cardSpot);
-    addToTravel(cardSpot);
+    console.log(planName);
+
+    addToTravel(cardSpot,planName);
     setCardSpot(null);
   };
+  console.log(planName)
 
   return (
     <Card

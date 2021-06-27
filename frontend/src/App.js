@@ -12,6 +12,7 @@ dotenv.config();
 const App = () => {
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const [planName, setPlanName] = useState("");
   const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel } = useTravel();
   
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -35,6 +36,8 @@ const App = () => {
           deleteOneSpot={deleteOneSpot}
           reorderTravel={reorderTravel}
           setTravel={setTravel}
+          planName={planName}
+          setPlanName={setPlanName}
           // isLoaded={isLoaded}
           // loadError={loadError}
         />
@@ -42,6 +45,8 @@ const App = () => {
           travel={travel}
           addToTravel={addToTravel}
           deleteOneSpot={deleteOneSpot}
+          planName={planName}
+
           // isLoaded={isLoaded}
           // loadError={loadError}
         />

@@ -32,7 +32,7 @@ const center = {
   lng: 121.565414,
 };
 
-const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel }) => {
+const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel,planName }) => {
 
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
@@ -66,7 +66,9 @@ const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel }) =>
 
     service.getDetails(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+      
         let newresults = Object.assign(latlng, results);
+  
         console.log(newresults);
         setCardSpot(newresults);
       }
@@ -85,6 +87,8 @@ const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel }) =>
     }
   };
 
+  //console.log(planName)
+
   /////////utility function//////////////////////////////////
 
   // if (loadError) return "Error";
@@ -96,6 +100,7 @@ const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel }) =>
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}
           addToTravel={addToTravel}
+          planName={planName}
         />
 
       <GoogleMap

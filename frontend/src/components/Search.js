@@ -29,6 +29,7 @@ const Search = ({
   panTo,
   placeIDToDetail,
   addToTravel,
+  planName
   // loadError,
   // isLoaded,
 }) => {
@@ -82,6 +83,7 @@ const Search = ({
 
   // if (loadError) return "Error";
   // if (!isLoaded) return "Loading...";
+  
 
   return (
     <div className="search">
@@ -94,6 +96,7 @@ const Search = ({
             cardSpot={cardSpot}
             addToTravel={addToTravel}
             setCardSpot={setCardSpot}
+            planName={planName}
           />
         </Card>
       ) : null}
