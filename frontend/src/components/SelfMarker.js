@@ -26,16 +26,15 @@ function SelfMarker({
       waypoints = waypoints
         .map((point) => {
           return { location: point.name };
-        })
-        .reverse();
+        });
 
       return (
         <>
           <DirectionsService
             // required
             options={{
-              destination: origin,
-              origin: destination,
+              destination: destination,
+              origin: origin,
 
               travelMode: "DRIVING",
               //waypoints: [{location: "台北101"},{location: "台灣大學"}],

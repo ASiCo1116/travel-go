@@ -12,10 +12,11 @@ dotenv.config();
 const App = () => {
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState("");
-  const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel } =
-    useTravel();
+  const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel } = useTravel();
+  
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const libraries = ["places"];
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: googleMapsApiKey,
     libraries,

@@ -2,6 +2,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+
 import React from "react";
 import {
   Combobox,
@@ -31,6 +32,7 @@ const Search = ({
   // loadError,
   // isLoaded,
 }) => {
+
   const {
     ready,
     value,

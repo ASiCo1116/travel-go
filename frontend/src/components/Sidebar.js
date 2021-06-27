@@ -5,6 +5,7 @@ import { useState, useCallback, useRef } from "react";
 import ReactDOM from "react-dom";
 import Search from "./Search";
 import axios from "axios";
+import {CreateTravel,MutateTravel} from "../api/api.js"
 
 // import useTravel from "../hook/useTravel";
 
@@ -48,7 +49,17 @@ const getListStyle = (isDraggingOver) => ({
 /*
  ***********  axios TODO  *********
  */
-const savePlan = () => {};
+const savePlan = (travel) => {
+
+
+  console.log(travel)
+  MutateTravel(travel);
+  
+};
+
+
+
+
 
 const Sidebar = ({
   travel,
@@ -86,6 +97,7 @@ const Sidebar = ({
     setVisable(false);
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   const mapRef = useRef();
 
   const panTo = useCallback(({ lat, lng }) => {
@@ -117,17 +129,22 @@ const Sidebar = ({
     });
   }, []);
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="w-96">
+
       <div className="flex items-center justify-center justify-evenly">
         <Button type="primary" onClick={showSearchLocation}>
           Add place
         </Button>
-        <Button onClick={savePlan}>Save plan</Button>
+        <Button onClick={()=>{savePlan(travel)}}>Save plan</Button>
       </div>
+
       <div className="flex items-center justify-center justify-evenly">
         <Input placeholder="Plan name" />
       </div>
+
       <div className="flex items-center justify-center">
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable">
@@ -166,6 +183,7 @@ const Sidebar = ({
           </Droppable>
         </DragDropContext>
       </div>
+
       <Drawer
         title="Search location"
         placement="bottom"
@@ -181,6 +199,8 @@ const Sidebar = ({
           addToTravel={addToTravel}
         />
       </Drawer>
+
+      
     </div>
   );
 };

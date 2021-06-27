@@ -12,17 +12,20 @@ const useTravel = () => {
   };
 
   const addToTravel = (spot) => {
-    setTravel((current) => [spot, ...current]);
+    
+    setTravel((current) => [...current,spot]);
   };
 
   const deleteOneSpot = () => {
-    setTravel([
-      {
-        lat: 25.032969,
-        lng: 121.565414,
-      },
-    ]);
+
+    setTravel((current)=>{   current.splice(-1,1); return(current)});
   };
+
+
+
+
+
+
 
   return { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel };
 };
