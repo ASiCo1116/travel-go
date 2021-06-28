@@ -98,7 +98,10 @@ const Body = ({
 
   return (
     <div className="mt-20 flex h-screen overflow-y-hidden fixed w-screen">
-      <div id="sidebar" className="w-1/4 overflow-y-scroll">
+      <div
+        id="sidebar"
+        className="w-1/4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-300 overflow-y-scroll"
+      >
         <Sidebar
           travel={travel}
           addToTravel={addToTravel}
