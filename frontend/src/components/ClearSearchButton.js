@@ -1,6 +1,6 @@
 import "@reach/combobox/styles.css";
 
-const ClearSearchButton = ({ cleanInput, setCardSpot }) => {
+const ClearSearchButton = ({ cleanInput, setCardSpot ,setSuggestions}) => {
   return (
     <button
       className="clearsearch"
@@ -13,6 +13,7 @@ const ClearSearchButton = ({ cleanInput, setCardSpot }) => {
         }
 
         setCardSpot(null);
+        setSuggestions([])
         //console.log(cardSpot)
       }}
     >

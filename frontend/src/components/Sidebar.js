@@ -52,6 +52,9 @@ const Sidebar = ({
   setPlanName,
   panTo,
   placeIDToDetail,
+  SearchNearby,
+  suggestions,
+  setSuggestions
 }) => {
   // const [items, setItems] = useState([]);
 
@@ -159,6 +162,9 @@ const Sidebar = ({
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}
           addToTravel={addToTravel}
+          SearchNearby={SearchNearby}
+          suggestions={suggestions}
+          setSuggestions={setSuggestions}
         />
       </Drawer>
       <div className="flex items-center justify-center">{planName}</div>

@@ -15,6 +15,8 @@ const InnerCard = ({
   addToTravel,
   setCardSpot,
   planName,
+  setSuggestions,
+  suggestions
 }) => {
   const onClickAddTravel = () => {
     console.log("hi");
@@ -22,9 +24,12 @@ const InnerCard = ({
     console.log(planName);
 
     addToTravel(cardSpot, planName);
-    setCardSpot(null);
+    if (cardSpot) setCardSpot(null);
+    if(suggestions)setSuggestions([]);
+    
+    
   };
-  console.log(planName);
+  //console.log(planName);
 
   return (
     <div className="site-card-wrapper">

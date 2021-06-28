@@ -30,6 +30,9 @@ const Search = ({
   placeIDToDetail,
   addToTravel,
   planName,
+  SearchNearby,
+  suggestions,
+  setSuggestions
   // loadError,
   // isLoaded,
 }) => {
@@ -49,10 +52,16 @@ const Search = ({
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
 
   const { cardSpot, setCardSpot } = useCardSpot();
+  const [inputValue,setInputValue ]=useState("");
+  
+
 
   const handleInput = (e) => {
     //將正在打的字給usePlacesAutocoplete的value，讓他去找並丟suggestion
-    setValue(e.target.value);
+    //console.log(e.target.value.length)
+    setValue(e.target.value)
+    //setInputValue(e.target.value)
+   
   };
 
   const handleSelect = async (address) => {
@@ -79,8 +88,27 @@ const Search = ({
 
   const cleanInput = () => {
     setValue("");
+    setInputValue("")
   };
 
+
+  const onSearch= async()=>{
+    //setValue(inputValue);
+    let x = document.getElementById("myInput");
+    //console.log(x.value)
+    if(   !(! x.value  || x.value.trim().length === 0)   )//如果字串不為空
+    {
+      //console.log(x.value)
+
+        SearchNearby(x.value)
+
+
+
+
+    }
+  }
+
+  
   // if (loadError) return "Error";
   // if (!isLoaded) return "Loading...";
 
@@ -88,39 +116,71 @@ const Search = ({
     <div className="search">
       <Combobox onSelect={handleSelect}>
         <div className="flex md:space-x-4">
+          
           <ComboboxInput
+            //value={inputValue}
             value={value}
             onChange={handleInput}
             disabled={!ready}
             placeholder="Search location"
+            id="myInput" 
           ></ComboboxInput>
 
           <ClearSearchButton
             cleanInput={cleanInput}
             setCardSpot={setCardSpot}
+            setSuggestions={setSuggestions}
           />
+
+          <button onClick={onSearch}>search</button>
         </div>
 
         <ComboboxPopover portal={false}>
           <ComboboxList>
             {status === "OK" &&
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              ))}
+            data.map(({ id, description }) => (
+              <ComboboxOption key={id} value={description} />
+            ))}
+
+              
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
+
       {cardSpot ? (
         <InnerCard
           spotName={cardSpot.name}
           spotAddress={cardSpot.formatted_address}
           photoUrl={cardSpot.photos[0].getUrl()}
-          cardSpot={cardSpot}
           addToTravel={addToTravel}
+
           setCardSpot={setCardSpot}
+          cardSpot={cardSpot}
+          setSuggestions={setSuggestions}
+          
+          
           planName={planName}
         />
       ) : null}
+     
+
+    {suggestions.map((suggestion)=>{return(
+       <InnerCard
+          spotName={suggestion.name}
+          spotAddress={suggestion.formatted_address}
+          photoUrl={suggestion.photos[0].getUrl()}
+          addToTravel={addToTravel}
+
+          cardSpot={suggestion}
+          setSuggestions={setSuggestions}
+          setCardSpot={setCardSpot}
+          
+          planName={planName}
+        />)}
+       )
+      }
+    
+      
     </div>
   );
 };

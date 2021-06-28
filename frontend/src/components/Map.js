@@ -41,6 +41,7 @@ const Map = ({
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
   const [response, setResponse] = React.useState("");
+  const [suggestions,setSuggestions ]=React.useState([]);
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -77,6 +78,26 @@ const Map = ({
     });
   }, []);
 
+
+
+  const SearchNearby =React.useCallback((spotType) => {
+    const service = new window.google.maps.places.PlacesService(mapRef.current);
+
+    const request = {
+      location:{lat:mapRef.current.center.lat(),
+                lng:mapRef.current.center.lng()},
+      radius: 1000,
+      type: [spotType]
+    };
+    service.nearbySearch(request, (results, status)=>{
+      if(status === window.google.maps.places.PlacesServiceStatus.OK) {
+        //console.log(results)
+        setSuggestions(results)
+
+      }
+    })
+  }, []);
+
   const directionsCallback = (response) => {
     console.log("this is response:", response);
 
@@ -110,6 +131,9 @@ const Map = ({
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}
           mapRef={mapRef}
+          SearchNearby={SearchNearby}
+          suggestions={suggestions}
+          setSuggestions={setSuggestions}
         />
       </div>
       <div>
