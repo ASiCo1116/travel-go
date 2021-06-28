@@ -4,8 +4,6 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+  variants: { backgroundOpacity: ["active"], extend: {} },
+  plugins: [require("tailwind-scrollbar")],
 };

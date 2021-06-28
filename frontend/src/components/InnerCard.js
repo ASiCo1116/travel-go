@@ -64,25 +64,6 @@ const InnerCard = ({
       </Col> */}
       </Row>
     </div>
-    // <Card
-    //   // hoverable
-    //   // style={{ marginTop: 16 }}
-    //   type="inner"
-    //   title=""
-    //   extra={
-    //     <button className="addtravel" onClick={onClickAddTravel}>
-    //       <img src="/close.svg.png" width="400" height="400" alt="add" />
-    //     </button>
-    //   }
-    //   //loading={true}
-    //   //cover={ <img alt="example" src={SelectedSpot.photos[0].getUrl() }/> }
-    // >
-    //   <Meta
-    //     avatar={<Avatar shape="square" size={100} src={photoUrl} />}
-    //     title={spotName}
-    //     description={spotAddress}
-    //   />
-    // </Card>
   );
 };
 

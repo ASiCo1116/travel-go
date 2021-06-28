@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 
 const Header = () => {
   return (
-    <div className="flex justify-around bg-blue-300">
+    <div className="bg-blue-300 top-0 fixed w-full overflow-y-hidden z-50 pb-2">
       <PageHeader
         avatar={<Avatar size={64} icon={<UserOutlined />} />}
         className="site-page-header font-mono"
@@ -12,7 +12,6 @@ const Header = () => {
         onBack={() => null}
         title="Travel GO !"
       />
-      <div className="self-center font-mono text-xl">William</div>
     </div>
   );
 };
