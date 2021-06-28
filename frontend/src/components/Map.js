@@ -7,37 +7,40 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
-
 import "@reach/combobox/styles.css";
 import "antd/dist/antd.css";
 import Search from "./Search";
 // import useTravel from "../hook/useTravel";
 import SelfMarker from "./SelfMarker";
-import Sidebar from "./Sidebar"
-import { Container, Row, Col } from 'reactstrap';
+import Sidebar from "./Sidebar";
+import { Container, Row, Col } from "reactstrap";
 
 import dotenv from "dotenv-defaults";
 
 dotenv.config();
-
 
 const mapContainerStyle = {
   height: "100vh",
   width: "100vw",
 };
 
-
 const center = {
   lat: 25.032969,
   lng: 121.565414,
 };
 
-const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel,planName }) => {
-
+const Map = ({
+  travel,
+  addToTravel,
+  deleteOneSpot,
+  reorderTravel,
+  setTravel,
+  planName,
+  setPlanName,
+}) => {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
   const [response, setResponse] = React.useState("");
-
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -66,9 +69,8 @@ const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel,planN
 
     service.getDetails(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-      
         let newresults = Object.assign(latlng, results);
-  
+
         console.log(newresults);
         setCardSpot(newresults);
       }
@@ -95,37 +97,47 @@ const Map = ({ travel, addToTravel, deleteOneSpot, reorderTravel,setTravel,planN
   // if (!isLoaded) return "Loading...";
 
   return (
-    <div>
-      <Search
+    <div className="flex">
+      <div>
+        <Sidebar
+          travel={travel}
+          addToTravel={addToTravel}
+          deleteOneSpot={deleteOneSpot}
+          reorderTravel={reorderTravel}
+          setTravel={setTravel}
+          planName={planName}
+          setPlanName={setPlanName}
+          panTo={panTo}
+          placeIDToDetail={placeIDToDetail}
+          mapRef={mapRef}
+        />
+      </div>
+      <div>
+        {/* <Search
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}
           addToTravel={addToTravel}
           planName={planName}
-        />
-
-      <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={14}
-        center={center}
-        onLoad={onMapLoad}
-      >
-
-        <SelfMarker
-          travel={travel}
-          Marker={Marker}
-          DirectionsService={DirectionsService}
-          DirectionsRenderer={DirectionsRenderer}
-          response={response}
-          directionsCallback={directionsCallback}
-        />
-      </GoogleMap>
- 
-
-      
+        /> */}
+        <GoogleMap
+          id="map"
+          mapContainerStyle={mapContainerStyle}
+          zoom={14}
+          center={center}
+          onLoad={onMapLoad}
+        >
+          <SelfMarker
+            travel={travel}
+            Marker={Marker}
+            DirectionsService={DirectionsService}
+            DirectionsRenderer={DirectionsRenderer}
+            response={response}
+            directionsCallback={directionsCallback}
+          />
+        </GoogleMap>
+      </div>
     </div>
   );
 };
-
 
 export default Map;

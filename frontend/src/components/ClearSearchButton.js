@@ -1,7 +1,6 @@
 import "@reach/combobox/styles.css";
-import React from "react";
 
-function ClearSearchButton({ cleanInput, setCardSpot }) {
+const ClearSearchButton = ({ cleanInput, setCardSpot }) => {
   return (
     <button
       className="clearsearch"
@@ -17,9 +16,9 @@ function ClearSearchButton({ cleanInput, setCardSpot }) {
         //console.log(cardSpot)
       }}
     >
-      {/* <img src="close.svg.png" alt="close" /> */}
+      <img src="close.svg.png" width="20" height="20" alt="close" />
     </button>
   );
-}
+};
 
 export default ClearSearchButton;

@@ -13,8 +13,9 @@ const App = () => {
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [planName, setPlanName] = useState("");
-  const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel } = useTravel();
-  
+  const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel } =
+    useTravel();
+
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const libraries = ["places"];
 
@@ -29,28 +30,15 @@ const App = () => {
   return (
     <div className="h-full overflow-hidden fixed">
       <Header />
-      <div className="flex">
-        <Sidebar
-          travel={travel}
-          addToTravel={addToTravel}
-          deleteOneSpot={deleteOneSpot}
-          reorderTravel={reorderTravel}
-          setTravel={setTravel}
-          planName={planName}
-          setPlanName={setPlanName}
-          // isLoaded={isLoaded}
-          // loadError={loadError}
-        />
-        <Map
-          travel={travel}
-          addToTravel={addToTravel}
-          deleteOneSpot={deleteOneSpot}
-          planName={planName}
-
-          // isLoaded={isLoaded}
-          // loadError={loadError}
-        />
-      </div>
+      <Map
+        travel={travel}
+        addToTravel={addToTravel}
+        deleteOneSpot={deleteOneSpot}
+        reorderTravel={reorderTravel}
+        setTravel={setTravel}
+        planName={planName}
+        setPlanName={setPlanName}
+      />
     </div>
   );
 };

@@ -29,11 +29,10 @@ const Search = ({
   panTo,
   placeIDToDetail,
   addToTravel,
-  planName
+  planName,
   // loadError,
   // isLoaded,
 }) => {
-
   const {
     ready,
     value,
@@ -66,6 +65,7 @@ const Search = ({
       const results = await getGeocode({ address });
       //const { lat, lng } = await getLatLng(results[0]);
       //panTo({ lat, lng });
+      console.log("res", results);
       const latlng = await getLatLng(results[0]);
       panTo(latlng);
 
@@ -83,37 +83,23 @@ const Search = ({
 
   // if (loadError) return "Error";
   // if (!isLoaded) return "Loading...";
-  
 
   return (
     <div className="search">
-      {cardSpot ? (
-        <Card title="Seraching Result" id="card">
-          <InnerCard
-            spotName={cardSpot.name}
-            spotAddress={cardSpot.formatted_address}
-            photoUrl={cardSpot.photos[0].getUrl()}
-            cardSpot={cardSpot}
-            addToTravel={addToTravel}
-            setCardSpot={setCardSpot}
-            planName={planName}
-          />
-        </Card>
-      ) : null}
       <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder="Search your location"
-        ></ComboboxInput>
+        <div className="flex md:space-x-4">
+          <ComboboxInput
+            value={value}
+            onChange={handleInput}
+            disabled={!ready}
+            placeholder="Search location"
+          ></ComboboxInput>
 
-        <p>
           <ClearSearchButton
             cleanInput={cleanInput}
             setCardSpot={setCardSpot}
           />
-        </p>
+        </div>
 
         <ComboboxPopover portal={false}>
           <ComboboxList>
@@ -124,6 +110,17 @@ const Search = ({
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
+      {cardSpot ? (
+        <InnerCard
+          spotName={cardSpot.name}
+          spotAddress={cardSpot.formatted_address}
+          photoUrl={cardSpot.photos[0].getUrl()}
+          cardSpot={cardSpot}
+          addToTravel={addToTravel}
+          setCardSpot={setCardSpot}
+          planName={planName}
+        />
+      ) : null}
     </div>
   );
 };
