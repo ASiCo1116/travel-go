@@ -47,7 +47,7 @@ const InnerCard = ({
           >
             <Meta
               className=" text-red-500"
-              avatar={<Avatar shape="square" size={100} src={photoUrl} />}
+              avatar={<Avatar shape="square" size={100} src={cardSpot.photos[0].getUrl()} />}
               description={spotAddress}
             />
           </Card>

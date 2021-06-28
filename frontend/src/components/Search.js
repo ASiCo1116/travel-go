@@ -164,7 +164,9 @@ const Search = ({
       ) : null}
      
 
-    {suggestions.map((suggestion)=>{return(
+    {
+      (
+      suggestions.map((suggestion)=>{return(
        <InnerCard
           spotName={suggestion.name}
           spotAddress={suggestion.formatted_address}
@@ -178,7 +180,9 @@ const Search = ({
           planName={planName}
         />)}
        )
-      }
+      )
+    
+    }
     
       
     </div>
