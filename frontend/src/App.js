@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import Map from "./components/Map";
+import Body from "./components/Body";
 import { useState } from "react";
 import useTravel from "./hook/useTravel";
 import dotenv from "dotenv-defaults";
@@ -28,9 +28,9 @@ const App = () => {
   if (!isLoaded) return "Loading...";
 
   return (
-    <div className="h-full overflow-hidden fixed">
+    <div>
       <Header />
-      <Map
+      <Body
         travel={travel}
         addToTravel={addToTravel}
         deleteOneSpot={deleteOneSpot}

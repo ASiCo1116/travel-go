@@ -20,8 +20,8 @@ import dotenv from "dotenv-defaults";
 dotenv.config();
 
 const mapContainerStyle = {
-  height: "100vh",
-  width: "100vw",
+  height: "100%",
+  width: "100%",
 };
 
 const center = {
@@ -29,7 +29,7 @@ const center = {
   lng: 121.565414,
 };
 
-const Map = ({
+const Body = ({
   travel,
   addToTravel,
   deleteOneSpot,
@@ -97,8 +97,8 @@ const Map = ({
   // if (!isLoaded) return "Loading...";
 
   return (
-    <div className="flex">
-      <div>
+    <div className="mt-20 flex h-screen overflow-y-hidden fixed w-screen">
+      <div id="sidebar" className="w-1/4 overflow-y-scroll">
         <Sidebar
           travel={travel}
           addToTravel={addToTravel}
@@ -112,7 +112,7 @@ const Map = ({
           mapRef={mapRef}
         />
       </div>
-      <div>
+      <div className="w-3/4">
         {/* <Search
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}
@@ -140,4 +140,4 @@ const Map = ({
   );
 };
 
-export default Map;
+export default Body;

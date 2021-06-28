@@ -34,6 +34,8 @@ const useTravel = () => {
   const deleteOneSpot = () => {
     setTravel((current) => {
       current.splice(-1, 1);
+      console.log(current);
+
       return current;
     });
   };
