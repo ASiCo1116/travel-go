@@ -20,7 +20,7 @@ function InnerCard({spotName,spotAddress ,photoUrl,cardSpot,addToTravel,setCardS
 
     }
 
-
+    console.log("photoUrl",photoUrl)
 
     return(  
     

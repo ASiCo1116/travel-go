@@ -16,7 +16,7 @@ const InnerCard = ({
   setCardSpot,
   planName,
   setSuggestions,
-  suggestions
+  suggestions,
 }) => {
   const onClickAddTravel = () => {
     console.log("hi");
@@ -25,44 +25,28 @@ const InnerCard = ({
 
     addToTravel(cardSpot, planName);
     if (cardSpot) setCardSpot(null);
-    if(suggestions)setSuggestions([]);
-    
-    
+    if (suggestions) setSuggestions([]);
   };
   //console.log(planName);
 
   return (
-    <div className="site-card-wrapper">
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card
-            title={spotName}
-            bordered={true}
-            extra={
-              <button className="addtravel" onClick={onClickAddTravel}>
-                <PlusOutlined />
-                {/* <img src="/close.svg.png" width="15" height="15" alt="add" /> */}
-              </button>
-            }
-          >
-            <Meta
-              className=" text-red-500"
-              avatar={<Avatar shape="square" size={100} src={cardSpot.photos[0].getUrl()} />}
-              description={spotAddress}
-            />
-          </Card>
-        </Col>
-        {/* <Col span={8}>
-        <Card title="Card title" bordered={false}>
-          Card content
-        </Card>
-      </Col>
-      <Col span={8}>
-        <Card title="Card title" bordered={false}>
-          Card content
-        </Card>
-      </Col> */}
-      </Row>
+    <div className="w-80">
+      <Card
+        className="w-80"
+        title={spotName}
+        bordered={true}
+        extra={
+          <button className="addtravel" onClick={onClickAddTravel}>
+            <PlusOutlined />
+          </button>
+        }
+      >
+        <Meta
+          className=" text-red-500"
+          avatar={<Avatar shape="square" size={100} src={photoUrl} />}
+          description={spotAddress}
+        />
+      </Card>
     </div>
   );
 };
