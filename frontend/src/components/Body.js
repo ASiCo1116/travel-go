@@ -37,6 +37,9 @@ const Body = ({
   setTravel,
   planName,
   setPlanName,
+  addTime,
+  addTodo,
+  addPlanName
 }) => {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
@@ -98,7 +101,7 @@ const Body = ({
   }, []);
 
   const directionsCallback = (response) => {
-    console.log("this is response:", response);
+    //console.log("this is response:", response);
 
     if (response !== null) {
       if (response.status === "OK") {
@@ -136,6 +139,9 @@ const Body = ({
           SearchNearby={SearchNearby}
           suggestions={suggestions}
           setSuggestions={setSuggestions}
+          addTime={addTime}
+          addTodo={addTodo}
+          addPlanName={addPlanName}
         />
       </div>
       <div className="w-3/4">

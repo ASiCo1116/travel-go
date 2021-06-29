@@ -1,4 +1,4 @@
-import { Avatar, Button, Drawer, Input, Badge, DatePicker } from "antd";
+import { Avatar, Button, Drawer, Input, Badge, DatePicker,message } from "antd";
 import moment from "moment";
 import { MinusOutlined, EditOutlined } from "@ant-design/icons";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import Search from "./Search";
 import axios from "axios";
 import { CreateTravel, MutateTravel } from "../api/api.js";
+import DraggableCard from "./DraggableCard"
 
 const { RangePicker } = DatePicker;
 
@@ -49,19 +50,30 @@ const numberToAlphabet = (number) => {
   return alphabet || undefined;
 };
 
-const onChangeTime = (value, dateString) => {
-  console.log("Selected Time: ", value);
-  console.log("Formatted Selected Time: ", dateString);
-};
 
-const onOkTime = (value) => {
+
+const onOkTime = (value,dateString) => {
   console.log("onOk: ", value);
+  
 };
 
-const savePlan = (travel) => {
-  console.log(travel);
-  MutateTravel(travel);
+const savePlan =async (travel) => {
+//console.log("oooo")
+  let x=document.getElementById("PlanNameInput")
+  console.log(x.value)
+  if(x.value===""){
+    message.warning("Please fill in the Plan Name Before Saving")
+
+  }
+  else{
+
+    console.log(travel);
+    let res=await MutateTravel(travel);
+  }
+  
 };
+
+
 
 const Sidebar = ({
   travel,
@@ -75,7 +87,10 @@ const Sidebar = ({
   placeIDToDetail,
   SearchNearby,
   suggestions,
-  setSuggestions
+  setSuggestions,
+  addTime,
+  addTodo,
+  addPlanName
 }) => {
   // const [items, setItems] = useState([]);
 
@@ -92,7 +107,16 @@ const Sidebar = ({
     );
 
     setTravel(newItems);
-    // console.log(newItems);
+    console.log(newItems);
+  };
+
+
+  const onChangePlanName=(e)=>{
+    setPlanName(e.target.value)
+    addPlanName(travel,e.target.value)
+    
+    
+  
   };
 
   const [visible, setVisable] = useState(false);
@@ -122,12 +146,13 @@ const Sidebar = ({
       </div>
 
       <div className="items-center">
+        <p>plan name:</p>
         <Input
           className="w-48 block"
+          id="PlanNameInput"
           placeholder="Plan name"
-          onChange={(e) => {
-            setPlanName(e.target.value);
-          }}
+          //defaultValue="TestPlan"
+          onChange={onChangePlanName}
         />
       </div>
 
@@ -140,78 +165,24 @@ const Sidebar = ({
                 ref={provided.innerRef}
                 className="md:space-y-4"
               >
-                {travel.map((item, index) => (
-                  <Draggable
-                    key={item.placeId}
-                    draggableId={item.placeId}
+                {(travel.length !== 0) ? ( travel.map((item, index) => (
+                  <DraggableCard
+                    item={item}
                     index={index}
-                  >
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                        className="rounded-md border-gray-400 border"
-                      >
-                        <button
-                          className="self-start"
-                          onClick={() => deleteOneSpot}
-                        >
-                          {<MinusOutlined />}
-                        </button>
-                        <div className="flex w-80">
-                          <Badge count={numberToAlphabet(index)}>
-                            <Avatar
-                              shape="circle"
-                              size={100}
-                              src={item.photoURL}
-                            />
-                          </Badge>
-                          <div id="card-body" className="ml-2">
-                            <div
-                              id="title"
-                              className=" text-center font-bold text-lg "
-                            >
-                              {item.name}
-                            </div>
-
-                            <div id="content">
-                              <div id="content__time">
-                                Arrive time
-                                <DatePicker
-                                  bordered={false}
-                                  showTime={{ format: "HH:mm" }}
-                                  format="YYYY-MM-DD HH:mm"
-                                  onChange={onChangeTime}
-                                  onOk={onOkTime}
-                                />
-                                Leave time
-                                <DatePicker
-                                  bordered={false}
-                                  showTime={{ format: "HH:mm" }}
-                                  format="YYYY-MM-DD HH:mm"
-                                  onChange={onChangeTime}
-                                  onOk={onOkTime}
-                                />
-                              </div>
-                              <div id="content__todo">
-                                Todo
-                                <div>
-                                  <input type="text" />
-                                </div>
-                              </div>
-                              {/* <div>{<EditOutlined />}</div> */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+                    onOkTime ={onOkTime }
+                    getItemStyle={getItemStyle}
+                    numberToAlphabet={numberToAlphabet}
+                    deleteOneSpot={deleteOneSpot}
+                    travel={travel}
+                    addTime={addTime}
+                    setTravel={setTravel}
+                    addTodo={addTodo}
+                
+                  />
+                ))):null
+              
+              
+              }
                 {provided.placeholder}
               </div>
             )}
@@ -233,6 +204,7 @@ const Sidebar = ({
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}
           addToTravel={addToTravel}
+          planName={planName}
           SearchNearby={SearchNearby}
           suggestions={suggestions}
           setSuggestions={setSuggestions}

@@ -43,16 +43,28 @@ router.post('/mutate-travel',async function(req,res){
     
     
   try{
+
+
       const { params: {NewTravel } }=req.body;
       console.log(NewTravel) 
       //console.log(typeof(NewTravel[0].lat),typeof(NewTravel[0].lng),typeof(NewTravel[1].lat),typeof(NewTravel[1].lng),typeof(NewTravel[2].lat),typeof(NewTravel[2].lng)) 
-
+      
+      
       let travelname=NewTravel[0].travel
       //console.log(travelname)
       let existingTravel=await db.TravelModel.findOne({name:travelname})
 
-      if(existingTravel)//如果這個travel是存在的話
+      if(!existingTravel)//如果這個travel不存在的話，創一個
       {
+        
+      const newTravel = new  db.TravelModel({ name:travelname,spots:[] });
+      console.log("Created travel", newTravel);
+      //console.log("save return",newCard.save());會回傳一個promise
+      await newTravel.save()
+      existingTravel=newTravel
+
+      }
+
    
         await db.SpotModel.deleteMany({travel:existingTravel })
         console.log("delete old spots")
@@ -65,7 +77,6 @@ router.post('/mutate-travel',async function(req,res){
               arriveTime:spot.arriveTime,
               departureTime:spot.departureTime ,
               todo:spot.todo ,
-              cost:spot.cost ,
               lat:spot.lat ,
               lng:spot.lng ,
               placeId: spot.placeId,
@@ -80,6 +91,7 @@ router.post('/mutate-travel',async function(req,res){
               spotObj.save()
          }  )
          
+         
          //console.log(newSpots)
          
          
@@ -89,19 +101,8 @@ router.post('/mutate-travel',async function(req,res){
 
 
 
-      }
-      else
-      {
-        res.json({message:`The travel that try to mutate is not exist` })
+      
 
-      }
-      
-   
-   
-
-      
-      
- 
     
     }
     catch(e)

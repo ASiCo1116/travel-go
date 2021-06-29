@@ -23,11 +23,11 @@ const InnerCard = ({
     console.log(cardSpot);
     console.log(planName);
 
-    addToTravel(cardSpot, planName);
+    addToTravel(cardSpot,planName);
     if (cardSpot) setCardSpot(null);
     if (suggestions) setSuggestions([]);
   };
-  //console.log(planName);
+  //console.log("planName",planName);
 
   return (
     <div className="w-80">

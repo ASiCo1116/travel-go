@@ -7,18 +7,16 @@ const useTravel = () => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
-
     return result;
   };
 
-  const addToTravel = (spot, planName) => {
+  const addToTravel = (spot,planName) => {
     let transformSpot = {
       name: spot.name,
       travel: planName,
-      arriveTime: "4:10",
-      departureTime: "5:25",
-      todo: "none",
-      cost: "50",
+      arriveTime: "",
+      departureTime: "",
+      todo: "",
       lat: spot.lat,
       lng: spot.lng,
       placeId: spot.place_id,
@@ -31,16 +29,51 @@ const useTravel = () => {
     ///setTravel((current) => [...current,spot]);
   };
 
-  const deleteOneSpot = () => {
-    setTravel((current) => {
-      current.splice(-1, 1);
-      console.log(current);
+const addTime=(list,index,time,arrive)=>{
+  const result = Array.from(list);
+  const [removed]=result.splice(index,1)
+  if(arrive)//調整arrive time
+  {
+    removed.arriveTime=time
+    
+  }
+  else{
+    removed.departureTime=time
 
-      return current;
-    });
+  }
+  result.splice(index,0,removed)
+ 
+
+  return result
+
+}
+
+
+const addTodo=(list,index,todo)=>{
+  const result = Array.from(list);
+  const [removed]=result.splice(index,1)
+  removed.todo=todo
+  result.splice(index,0,removed)
+
+  return result
+
+}
+
+  const deleteOneSpot = (list,index) => {
+    const result = Array.from(list);
+    result.splice(index,1)
+    return result
   };
 
-  return { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel };
+  const addPlanName=(list,planName)=>{
+    const result = Array.from(list);
+    let newResult=result.map( (item)=>{item.travel=planName}  )
+    return newResult
+  
+  }
+
+
+  return { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel,addTime,addTodo,addPlanName };
 };
 
 export default useTravel;

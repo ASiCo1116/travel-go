@@ -13,7 +13,6 @@ const spotSchema = new Schema({
   arriveTime:{type: String},
   departureTime:{type: String},
   todo:{type: String},
-  cost:{type: String},
   lat:{type: Number, required: true},
   lng:{type: Number, required: true},
   placeId:{type: String, required: true},

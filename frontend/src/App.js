@@ -13,7 +13,7 @@ const App = () => {
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [planName, setPlanName] = useState("");
-  const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel } =
+  const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel,addTime,addTodo,addPlanName } =
     useTravel();
 
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -38,6 +38,9 @@ const App = () => {
         setTravel={setTravel}
         planName={planName}
         setPlanName={setPlanName}
+        addTime={addTime}
+        addTodo={addTodo}
+        addPlanName={addPlanName}
       />
     </div>
   );
