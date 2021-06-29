@@ -1,22 +1,20 @@
-import { Avatar, Button, Drawer, Input, Badge, DatePicker,message,Cascader  } from "antd";
-import moment from "moment";
-import { MinusOutlined, EditOutlined } from "@ant-design/icons";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState, useCallback, useRef } from "react";
-import ReactDOM from "react-dom";
+import { Button, Drawer, Input, message, Cascader } from "antd";
+import {
+  EditOutlined,
+  HomeOutlined,
+  EnvironmentOutlined,
+  HistoryOutlined,
+  SaveOutlined,
+} from "@ant-design/icons";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { useState } from "react";
 import Search from "./Search";
-import axios from "axios";
-import { CreateTravel, MutateTravel,QueryTravelDetail,QueryTravelName } from "../api/api.js";
-import DraggableCard from "./DraggableCard"
-
-const { RangePicker } = DatePicker;
-
-// fake data generator
-const getItems = (count) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
-    id: `item-${k}`,
-    content: `item ${k}`,
-  }));
+import {
+  MutateTravel,
+  QueryTravelDetail,
+  QueryTravelName,
+} from "../api/api.js";
+import DraggableCard from "./DraggableCard";
 
 const grid = 8;
 
@@ -31,12 +29,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
   // styles we need to apply on draggables
   ...draggableStyle,
-});
-
-const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-  // width: 250,
 });
 
 const numberToAlphabet = (number) => {
@@ -62,10 +54,9 @@ const savePlan = async (travel) => {
     message.warning("Please fill in the Plan Name Before Saving");
   } else {
     console.log(travel);
-    let res=await MutateTravel(travel);
-    console.log(res)
-    message.success(res)
-
+    let res = await MutateTravel(travel);
+    console.log(res);
+    message.success(res);
   }
 };
 /*
@@ -81,7 +72,6 @@ const options = [
   },
 ];
 */
-
 
 const Sidebar = ({
   travel,
@@ -101,10 +91,9 @@ const Sidebar = ({
   addPlanName,
   NewTravel,
   setNewTravel,
-  TravelFromDB, 
-  setTravelFromDB
+  TravelFromDB,
+  setTravelFromDB,
 }) => {
-  // const [items, setItems] = useState([]);
   const [options, setOptions] = useState([]);
 
   const onDragEnd = (result) => {
@@ -123,10 +112,9 @@ const Sidebar = ({
     console.log(newItems);
   };
 
-
-  const onChangePlanName=(e)=>{
-    setPlanName(e.target.value)
-    addPlanName(travel,e.target.value)
+  const onChangePlanName = (e) => {
+    setPlanName(e.target.value);
+    addPlanName(travel, e.target.value);
   };
 
   const [visible, setVisable] = useState(false);
@@ -139,81 +127,85 @@ const Sidebar = ({
     setVisable(false);
   };
 
-  const onSelectTravel=async (value)=>{
-    console.log(value)
-    travel= await QueryTravelDetail(value)
-    console.log(travel)
-    setTravel(travel)
-
-  }
+  const onSelectTravel = async (value) => {
+    console.log(value);
+    travel = await QueryTravelDetail(value);
+    console.log(travel);
+    setTravel(travel);
+  };
 
   return (
-    <div className="md:space-y-4 pt-4">
-      <Button type="primary" onClick={ 
-        ()=>{setNewTravel(false)
-         setTravelFromDB(false)
-         setTravel([]) 
-         }}>
-        return
-      </Button>
-
-    {
-
-    NewTravel? 
-  (<div>
+    <div id="sidebar" className="md:space-y-4 pt-4">
       <div className="flex items-center justify-center justify-evenly">
-      <Button type="primary" onClick={showSearchLocation}>
-        Add place
-      </Button>
-      <Button
-        // type="primary"
-        onClick={() => {
-          savePlan(travel);
-        }}
-      >
-        Save plan
-      </Button>
-
-    </div>
-
-    <div className="items-center">
-      <p>plan name:</p>
-      <Input
-        className="w-48 block"
-        id="PlanNameInput"
-        placeholder="Plan name"
-        //defaultValue="TestPlan"
-        onChange={onChangePlanName}
-      />
-    </div>
-
-    </div>
-    )
-    :TravelFromDB?(
-      <div className="flex items-center justify-center justify-evenly">
-      <Cascader options={options}  placeholder="Please select" onChange={onSelectTravel} />
+        <Button
+          type="primary"
+          icon={<HomeOutlined />}
+          onClick={() => {
+            setNewTravel(false);
+            setTravelFromDB(false);
+            setTravel([]);
+          }}
+        >
+          Main menu
+        </Button>
       </div>
-    )
-    :( <div className="flex items-center justify-center justify-evenly">
-    <Button type="primary" onClick={()=>{setNewTravel(true)}}>
-      Add New Travel
-    </Button>
-    <Button
-      // type="primary"
-      onClick={async () => {
-        setTravelFromDB(true)
-        let options=await QueryTravelName()
-        setOptions(options)
-      
-      }}
-    >
-      from DB
-    </Button>
-  </div>)
+      {NewTravel ? (
+        <div>
+          <div className="flex items-center justify-center justify-evenly">
+            <Button icon={<EnvironmentOutlined />} onClick={showSearchLocation}>
+              Add place
+            </Button>
+            <Button
+              icon={<SaveOutlined />}
+              onClick={() => {
+                savePlan(travel);
+              }}
+            >
+              Save plan
+            </Button>
+          </div>
 
-            
-    }
-    
+          <div className="mt-4">
+            <input
+              type="text"
+              className="block text-center r-1/2 w-full text-xl"
+              id="PlanNameInput"
+              placeholder="Fill in your plan name"
+              //defaultValue="TestPlan"
+              onChange={onChangePlanName}
+            />
+          </div>
+        </div>
+      ) : TravelFromDB ? (
+        <div className="flex items-center justify-center justify-evenly">
+          <Cascader
+            options={options}
+            placeholder="Please select"
+            onChange={onSelectTravel}
+          />
+        </div>
+      ) : (
+        <div className="flex items-center justify-center justify-evenly">
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              setNewTravel(true);
+            }}
+          >
+            Start a new plan
+          </Button>
+          <Button
+            icon={<HistoryOutlined />}
+            onClick={async () => {
+              setTravelFromDB(true);
+              let options = await QueryTravelName();
+              setOptions(options);
+            }}
+          >
+            Previous plans
+          </Button>
+        </div>
+      )}
 
       <div className="flex items-center justify-center">
         <DragDropContext onDragEnd={onDragEnd}>
@@ -267,7 +259,6 @@ const Sidebar = ({
           setSuggestions={setSuggestions}
         />
       </Drawer>
-      <div className="flex items-center justify-center">{planName}</div>
     </div>
   );
 };
