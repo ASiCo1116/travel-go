@@ -20,28 +20,7 @@ const DraggableCard = ({
   setTravel,
   addTodo,
 }) => {
-  const onChangeArriveTime = (value, dateString) => {
-    //console.log("Selected Time: ", value);
-    console.log("index", index);
-    console.log("Arrive Time: ", value);
-    const newitems = addTime(travel, index, value, true);
-    //console.log(newitems)
-    setTravel(newitems);
-  };
 
-  const onChangeDepartureTime = (value, dateString) => {
-    //console.log("Selected Time: ", value);
-    console.log("index", index);
-    console.log("Departure Time: ", value);
-    const newitems = addTime(travel, index, value, false);
-    //console.log(newitems)
-    setTravel(newitems);
-  };
-  const onChangeTodo = (e) => {
-    //console.log(e.target.value);
-    const newitems = addTodo(travel, index, e.target.value);
-    setTravel(newitems);
-  };
 
 
 
@@ -49,14 +28,13 @@ const onChangeArriveTime = (value, dateString) => {
   //console.log("Selected Time: ", value);
   //console.log("index",index)
   console.log("Arrive Time: ", value);
-  console.log("Arrive Time dateString:", dateString);
   const newitems=addTime(travel,index,value,true)
   //console.log(newitems)
   setTravel(newitems);
   
   
 };
-/*
+
 const onChangeDepartureTime = (value, dateString) => {
   //console.log("Selected Time: ", value);
   console.log("index",index)
@@ -68,14 +46,8 @@ const onChangeDepartureTime = (value, dateString) => {
   
   
 };
-*/
-const onChangeDepartureTime = (event) => {
-  
-  console.log(event)
-  console.log( JSON.stringify(event))
-  
-  
-};
+
+
 const onChangeTodo = (e) => {
   //console.log(e.target.value);
   const newitems=addTodo(travel,index,e.target.value)
@@ -122,12 +94,12 @@ const onClickDeleteSpot = () => {
                                   format="YYYY-MM-DD HH:mm"
                                   onChange={onChangeArriveTime }
                                   onOk={onOkTime}
-                                  //value={item.arriveTime}
-                                  value="2021-06-03 04:34"
+                                  value={item.arriveTime}
+                                  //value="2021-06-03 04:34"
                                 
                                 />
                                 Leave time
-                                <DatePicker
+                                <CustomDatePicker
                                   bordered={false}
                                   showTime={{ format: "HH:mm" }}
                                   format="YYYY-MM-DD HH:mm"

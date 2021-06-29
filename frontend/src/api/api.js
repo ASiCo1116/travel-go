@@ -1,16 +1,19 @@
 import axios from 'axios';
+import { Button, Drawer, Input, message, Cascader } from "antd";
 
 const instance = axios.create({baseURL: `http://localhost:5000/`,});
 
-const CreateTravel = async (NewTravel) => {
+const CreateTravel = async (NewTravel,user) => {
 
   try
   {
     console.log("cool")
    
-    const {data:{message}} = await instance.post('/api/create-travel', {params:{NewTravel }});
+    const {data:{message,status}} = await instance.post('/api/create-travel', {params:{NewTravel,user }});
     console.log(message)
-    return message
+    console.log(status)
+    let res=message
+    return {res,status}
     
   }
   catch(err)
@@ -23,15 +26,36 @@ const CreateTravel = async (NewTravel) => {
   }
 
 
-  const MutateTravel = async (NewTravel) => {
+  const CreateUser = async (userName) => {
+
+    try
+    {
+      console.log("cool")
+      const {data:{message}} = await instance.post('/api/create-user', {params:{userName }});
+      console.log(message)
+      //return message
+      
+    }
+    catch(err)
+    {
+      console.log("error!!",err)
+    }
+  
+  
+    
+    }
+
+
+  const MutateTravel = async (NewTravel,user) => {
 
     try
     {
       console.log("cool")
      
-      const {data:{message}} = await instance.post('/api/mutate-travel', {params:{NewTravel }});
+      const {data:{message,status}} = await instance.post('/api/mutate-travel', {params:{NewTravel,user }});
       console.log(message)
-      return message
+      let res=message
+      return {res,status}
       
     }
     catch(err)
@@ -42,19 +66,18 @@ const CreateTravel = async (NewTravel) => {
   }
 
 
-  const QueryTravelName = async () => {
+  const QueryTravelName = async (userName) => {
 
     try
     {
       console.log("cool")
-      const {data:{message}} = await instance.post('/api/query-travelname');
+      const {data:{message}} = await instance.post('/api/query-travelname',{params:{userName}});
+      let travels=message.travels
+      
       //console.log(message)
-      let options=message.map( (item)=>{return{value:item.name,label:item.name}})
+      let options=travels.map( (item)=>{return{value:item.name,label:item.name}})
       console.log(options)
       return options
-     
-    
-      
     }
     catch(err)
     {
@@ -90,4 +113,4 @@ const CreateTravel = async (NewTravel) => {
 
 
 
-export {CreateTravel,MutateTravel,QueryTravelDetail,QueryTravelName};
+export {CreateTravel,MutateTravel,QueryTravelDetail,QueryTravelName,CreateUser};

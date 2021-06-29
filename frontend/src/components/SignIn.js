@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { CreateUser } from "../api/api.js";
+
 
 const SignIn = ({ userName, setUserName, setSignedIn, displayStatus }) => {
   return (
@@ -34,6 +36,7 @@ const SignIn = ({ userName, setUserName, setSignedIn, displayStatus }) => {
               msg: "Successfully sign in",
             });
             setSignedIn(true);
+            CreateUser(name)
           }
         }}
       ></Input.Search>

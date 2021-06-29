@@ -124,8 +124,7 @@ const Search = ({
             setCardSpot={setCardSpot}
             setSuggestions={setSuggestions}
           />
-
-          <button onClick={onSearch}>search</button>
+          
         </div>
 
         <ComboboxPopover portal={false}>

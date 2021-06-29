@@ -44,6 +44,7 @@ const Body = ({
   setNewTravel,
   TravelFromDB,
   setTravelFromDB,
+  userName
 }) => {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
@@ -150,6 +151,7 @@ const Body = ({
           setNewTravel={setNewTravel}
           TravelFromDB={TravelFromDB}
           setTravelFromDB={setTravelFromDB}
+          userName={userName}
         />
       </div>
       <div className="w-3/4">

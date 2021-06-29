@@ -20,17 +20,26 @@ const spotSchema = new Schema({
   photoURL:{type: String}
 });
 
+const userSchema = new Schema({
+  name: { type: String, required: true },
+  travels: [{ type: mongoose.Types.ObjectId, ref: 'Travel' }],
+});
+
+
 
 
 const SpotModel = mongoose.model('Spot', spotSchema);
 const TravelModel = mongoose.model('Travel', travelSchema);
+const UserModel = mongoose.model('User', userSchema);
 
 
 
 
 const db = {
     SpotModel,
-    TravelModel
+    TravelModel,
+    UserModel
+
 };
 
 

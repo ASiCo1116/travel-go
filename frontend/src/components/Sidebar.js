@@ -10,6 +10,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useState } from "react";
 import Search from "./Search";
 import {
+  CreateTravel,
   MutateTravel,
   QueryTravelDetail,
   QueryTravelName,
@@ -46,7 +47,20 @@ const onOkTime = (value, dateString) => {
   console.log("onOk: ", value);
 };
 
-const savePlan = async (travel) => {
+const savePlanMutate = async (travel,userName) => {
+  //console.log("oooo")
+    console.log(travel);
+    const {res,status} = await MutateTravel(travel,userName);
+    if (status){
+      message.success(res);
+    }
+    else{
+      message.error(res);
+    }
+  
+};
+
+const savePlanCreate = async (travel,userName) => {
   //console.log("oooo")
   let x = document.getElementById("PlanNameInput");
   console.log(x.value);
@@ -54,9 +68,17 @@ const savePlan = async (travel) => {
     message.warning("Please fill in the Plan Name Before Saving");
   } else {
     console.log(travel);
-    let res = await MutateTravel(travel);
+    //let res = await CreateTravel(travel,userName);
+    const {res,status} = await CreateTravel(travel,userName);
     console.log(res);
-    message.success(res);
+    console.log(status);
+    if (status){
+      message.success(res);
+    }
+    else{
+      message.error(res);
+    }
+    
   }
 };
 /*
@@ -93,6 +115,7 @@ const Sidebar = ({
   setNewTravel,
   TravelFromDB,
   setTravelFromDB,
+  userName
 }) => {
   const [options, setOptions] = useState([]);
 
@@ -127,11 +150,16 @@ const Sidebar = ({
     setVisable(false);
   };
 
-  const onSelectTravel = async (value) => {
+  const onSelectTravel = async (value) => { //選了travelname之後  把這個travelname set
+   
     console.log(value);
     travel = await QueryTravelDetail(value);
+
     console.log(travel);
     setTravel(travel);
+    document.getElementById("DBbutton").style.display = "block";
+    setPlanName(value);
+    addPlanName(travel,value)
   };
 
   return (
@@ -158,7 +186,7 @@ const Sidebar = ({
             <Button
               icon={<SaveOutlined />}
               onClick={() => {
-                savePlan(travel);
+                savePlanCreate(travel,userName);
               }}
             >
               Save plan
@@ -177,12 +205,31 @@ const Sidebar = ({
           </div>
         </div>
       ) : TravelFromDB ? (
-        <div className="flex items-center justify-center justify-evenly">
-          <Cascader
-            options={options}
-            placeholder="Please select"
-            onChange={onSelectTravel}
-          />
+        <div>
+            <div className="flex items-center justify-center justify-evenly">
+              <div>
+              <Cascader
+                options={options}
+                placeholder="Please select"
+                onChange={onSelectTravel}
+                allowClear={false}
+              />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center justify-evenly" id="DBbutton" style={{display: 'none'  }} >
+            <Button icon={<EnvironmentOutlined />} onClick={showSearchLocation}>
+              Add place
+            </Button>
+            <Button
+              icon={<SaveOutlined />}
+              onClick={() => {
+                savePlanMutate(travel,userName);
+              }}
+            >
+              Save plan
+            </Button>
+            </div>
         </div>
       ) : (
         <div className="flex items-center justify-center justify-evenly">
@@ -198,7 +245,7 @@ const Sidebar = ({
             icon={<HistoryOutlined />}
             onClick={async () => {
               setTravelFromDB(true);
-              let options = await QueryTravelName();
+              let options = await QueryTravelName(userName);
               setOptions(options);
             }}
           >

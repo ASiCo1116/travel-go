@@ -86,6 +86,7 @@ const App = () => {
           setNewTravel={setNewTravel}
           TravelFromDB={TravelFromDB}
           setTravelFromDB={setTravelFromDB}
+          userName={userName}
         />
       ) : (
         <SignIn
