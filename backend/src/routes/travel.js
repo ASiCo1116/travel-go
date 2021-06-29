@@ -41,8 +41,6 @@ router.post('/create-travel',async function(req,res){
 
 router.post('/mutate-travel',async function(req,res){
     
-  res.json({message:"Save Success" });
-  
   try{
 
 
@@ -98,14 +96,6 @@ router.post('/mutate-travel',async function(req,res){
          
          await db.TravelModel.findOneAndUpdate({name:travelname},{spots:newSpots})//重新更新travel物件
          res.json({message:"Save Success" });
-
-        
-
-
-
-      
-
-    
     }
     catch(e)
     {
@@ -115,6 +105,67 @@ router.post('/mutate-travel',async function(req,res){
     
 
 })
+
+router.post('/query-travelname',async function(req,res){
+  try{
+    
+    let existing=await db.TravelModel.find({})
+    console.log(existing)
+    res.json({message:existing });
+
+    
+    
+           
+    }
+    catch(e)
+    {
+      console.log(e)
+      res.json({ message: 'Something went wrong...' });
+    }
+    
+
+})
+
+
+
+
+
+
+
+
+
+
+router.post('/query-traveldetail',async function(req,res){
+  try{
+          const { params: {Name } }=req.body;
+          console.log(Name[0])
+          const travel=await queryTravelDetailWIthName (Name[0])
+          console.log("############this is travel###############")
+          console.log(travel)
+          res.json({ message: travel })
+          
+    
+           
+    }
+    catch(e)
+    {
+      console.log(e)
+      res.json({ message: 'Something went wrong...' });
+    }
+    
+
+})
+
+const queryTravelDetailWIthName = async (name) => {
+  let existing=await db.TravelModel.findOne({name})
+  console.log(existing)
+  return  existing
+                .populate('spots')
+                .execPopulate()
+
+};
+
+
 
 
 

@@ -40,6 +40,10 @@ const Body = ({
   addTime,
   addTodo,
   addPlanName,
+  NewTravel,
+  setNewTravel,
+  TravelFromDB,
+  setTravelFromDB,
 }) => {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
@@ -142,6 +146,10 @@ const Body = ({
           addTime={addTime}
           addTodo={addTodo}
           addPlanName={addPlanName}
+          NewTravel={NewTravel}
+          setNewTravel={setNewTravel}
+          TravelFromDB={TravelFromDB}
+          setTravelFromDB={setTravelFromDB}
         />
       </div>
       <div className="w-3/4">

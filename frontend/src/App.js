@@ -1,6 +1,5 @@
 import "./App.css";
 import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
 import Body from "./components/Body";
 import SignIn from "./components/SignIn";
 import { useState, useEffect } from "react";
@@ -55,6 +54,9 @@ const App = () => {
     addPlanName,
   } = useTravel();
 
+  const [NewTravel, setNewTravel] = useState(false);
+  const [TravelFromDB, setTravelFromDB] = useState(false);
+
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
   const { isLoaded, loadError } = useLoadScript({
@@ -80,6 +82,10 @@ const App = () => {
           addTime={addTime}
           addTodo={addTodo}
           addPlanName={addPlanName}
+          NewTravel={NewTravel}
+          setNewTravel={setNewTravel}
+          TravelFromDB={TravelFromDB}
+          setTravelFromDB={setTravelFromDB}
         />
       ) : (
         <SignIn
