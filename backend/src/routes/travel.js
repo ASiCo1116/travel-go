@@ -41,7 +41,8 @@ router.post('/create-travel',async function(req,res){
 
 router.post('/mutate-travel',async function(req,res){
     
-    
+  res.json({message:"Save Success" });
+  
   try{
 
 
@@ -96,6 +97,7 @@ router.post('/mutate-travel',async function(req,res){
          
          
          await db.TravelModel.findOneAndUpdate({name:travelname},{spots:newSpots})//重新更新travel物件
+         res.json({message:"Save Success" });
 
         
 
@@ -110,6 +112,7 @@ router.post('/mutate-travel',async function(req,res){
       console.log(e)
       res.json({ message: 'Something went wrong...' });
     }
+    
 
 })
 

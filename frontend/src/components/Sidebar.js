@@ -69,6 +69,8 @@ const savePlan =async (travel) => {
 
     console.log(travel);
     let res=await MutateTravel(travel);
+    message.success(res)
+
   }
   
 };

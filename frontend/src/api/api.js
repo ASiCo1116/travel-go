@@ -27,9 +27,9 @@ const CreateTravel = async (name) => {
     {
       console.log("cool")
      
-      const { data: { message }, } = await instance.post('/api/mutate-travel', {params:{NewTravel }});
-      //console.log(message)
-      //return {message}
+      const {data:{message}} = await instance.post('/api/mutate-travel', {params:{NewTravel }});
+      console.log(message)
+      return {message}
       
     }
     catch(err)
