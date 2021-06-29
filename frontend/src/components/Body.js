@@ -39,7 +39,7 @@ const Body = ({
   setPlanName,
   addTime,
   addTodo,
-  addPlanName
+  addPlanName,
 }) => {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
@@ -120,7 +120,7 @@ const Body = ({
   // if (!isLoaded) return "Loading...";
 
   return (
-    <div className="mt-20 flex h-screen overflow-y-hidden fixed w-screen">
+    <div className="mt-24 flex h-screen overflow-y-hidden fixed w-screen">
       <div
         id="sidebar"
         className="w-1/4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-300 overflow-y-scroll"

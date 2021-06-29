@@ -1,4 +1,12 @@
-import { Avatar, Button, Drawer, Input, Badge, DatePicker,message } from "antd";
+import {
+  Avatar,
+  Button,
+  Drawer,
+  Input,
+  Badge,
+  DatePicker,
+  message,
+} from "antd";
 import moment from "moment";
 import { MinusOutlined, EditOutlined } from "@ant-design/icons";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -7,7 +15,7 @@ import ReactDOM from "react-dom";
 import Search from "./Search";
 import axios from "axios";
 import { CreateTravel, MutateTravel } from "../api/api.js";
-import DraggableCard from "./DraggableCard"
+import DraggableCard from "./DraggableCard";
 
 const { RangePicker } = DatePicker;
 
@@ -50,32 +58,22 @@ const numberToAlphabet = (number) => {
   return alphabet || undefined;
 };
 
-
-
-const onOkTime = (value,dateString) => {
+const onOkTime = (value, dateString) => {
   console.log("onOk: ", value);
-  
 };
 
-const savePlan =async (travel) => {
-//console.log("oooo")
-  let x=document.getElementById("PlanNameInput")
-  console.log(x.value)
-  if(x.value===""){
-    message.warning("Please fill in the Plan Name Before Saving")
-
-  }
-  else{
-
+const savePlan = async (travel) => {
+  //console.log("oooo")
+  let x = document.getElementById("PlanNameInput");
+  console.log(x.value);
+  if (x.value === "") {
+    message.warning("Please fill in the Plan Name Before Saving");
+  } else {
     console.log(travel);
-    let res=await MutateTravel(travel);
-    message.success(res)
-
+    let res = await MutateTravel(travel);
+    message.success(res);
   }
-  
 };
-
-
 
 const Sidebar = ({
   travel,
@@ -92,7 +90,7 @@ const Sidebar = ({
   setSuggestions,
   addTime,
   addTodo,
-  addPlanName
+  addPlanName,
 }) => {
   // const [items, setItems] = useState([]);
 
@@ -112,13 +110,9 @@ const Sidebar = ({
     console.log(newItems);
   };
 
-
-  const onChangePlanName=(e)=>{
-    setPlanName(e.target.value)
-    addPlanName(travel,e.target.value)
-    
-    
-  
+  const onChangePlanName = (e) => {
+    setPlanName(e.target.value);
+    addPlanName(travel, e.target.value);
   };
 
   const [visible, setVisable] = useState(false);
@@ -167,24 +161,22 @@ const Sidebar = ({
                 ref={provided.innerRef}
                 className="md:space-y-4"
               >
-                {(travel.length !== 0) ? ( travel.map((item, index) => (
-                  <DraggableCard
-                    item={item}
-                    index={index}
-                    onOkTime ={onOkTime }
-                    getItemStyle={getItemStyle}
-                    numberToAlphabet={numberToAlphabet}
-                    deleteOneSpot={deleteOneSpot}
-                    travel={travel}
-                    addTime={addTime}
-                    setTravel={setTravel}
-                    addTodo={addTodo}
-                
-                  />
-                ))):null
-              
-              
-              }
+                {travel.length !== 0
+                  ? travel.map((item, index) => (
+                      <DraggableCard
+                        item={item}
+                        index={index}
+                        onOkTime={onOkTime}
+                        getItemStyle={getItemStyle}
+                        numberToAlphabet={numberToAlphabet}
+                        deleteOneSpot={deleteOneSpot}
+                        travel={travel}
+                        addTime={addTime}
+                        setTravel={setTravel}
+                        addTodo={addTodo}
+                      />
+                    ))
+                  : null}
                 {provided.placeholder}
               </div>
             )}
