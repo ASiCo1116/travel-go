@@ -136,11 +136,6 @@ const Sidebar = ({
     addPlanName(travel,e.target.value)
   };
 
-  const onGetTravelPlan =async () => {
-    let res =await QueryTravelDetail()
-      
-    };
-
   const [visible, setVisable] = useState(false);
 
   const showSearchLocation = () => {
@@ -185,11 +180,7 @@ const Sidebar = ({
       >
         Save plan
       </Button>
-      <Button
-        onClick={onGetTravelPlan}
-      >
-        Get Travel Plan
-      </Button>
+
     </div>
 
     <div className="items-center">
