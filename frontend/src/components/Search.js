@@ -36,13 +36,16 @@ const Search = ({
   // loadError,
   // isLoaded,
 }) => {
+
+
   const {
     ready,
     value,
     suggestions: { status, data },
     setValue,
     clearSuggestions,
-  } = usePlacesAutocomplete({
+        } 
+  = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 43.6532, lng: () => -79.3832 },
       radius: 100 * 1000,

@@ -16,6 +16,10 @@ const App = () => {
   const { travel, addToTravel, deleteOneSpot, reorderTravel, setTravel,addTime,addTodo,addPlanName } =
     useTravel();
 
+  const [NewTravel, setNewTravel] = useState(false);
+  const [TravelFromDB, setTravelFromDB] = useState(false);
+
+
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const libraries = ["places"];
 
@@ -41,6 +45,10 @@ const App = () => {
         addTime={addTime}
         addTodo={addTodo}
         addPlanName={addPlanName}
+        NewTravel={NewTravel}
+        setNewTravel={setNewTravel}
+        TravelFromDB={TravelFromDB} 
+        setTravelFromDB={setTravelFromDB}
       />
     </div>
   );
