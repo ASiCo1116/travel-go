@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import React, { useEffect,useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MinusOutlined, EditOutlined } from "@ant-design/icons";
+import CustomDatePicker from "./CustomDatePicker"
 
 
 const { Meta } = Card;
@@ -27,15 +28,16 @@ const DraggableCard = ({
 
 const onChangeArriveTime = (value, dateString) => {
   //console.log("Selected Time: ", value);
-  console.log("index",index)
+  //console.log("index",index)
   console.log("Arrive Time: ", value);
+  console.log("Arrive Time dateString:", dateString);
   const newitems=addTime(travel,index,value,true)
   //console.log(newitems)
   setTravel(newitems);
   
   
 };
-
+/*
 const onChangeDepartureTime = (value, dateString) => {
   //console.log("Selected Time: ", value);
   console.log("index",index)
@@ -44,6 +46,14 @@ const onChangeDepartureTime = (value, dateString) => {
   //console.log(newitems)
   setTravel(newitems);
 
+  
+  
+};
+*/
+const onChangeDepartureTime = (event) => {
+  
+  console.log(event)
+  console.log( JSON.stringify(event))
   
   
 };
@@ -101,13 +111,15 @@ const onClickDeleteSpot = () => {
                             <div id="content">
                               <div id="content__time">
                                 Arrive time
-                                <DatePicker
+                                < CustomDatePicker
                                   bordered={false}
                                   showTime={{ format: "HH:mm" }}
                                   format="YYYY-MM-DD HH:mm"
                                   onChange={onChangeArriveTime }
                                   onOk={onOkTime}
-                                  value={item.arriveTime}
+                                  //value={item.arriveTime}
+                                  value="2021-06-03 04:34"
+                                
                                 />
                                 Leave time
                                 <DatePicker

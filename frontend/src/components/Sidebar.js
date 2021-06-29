@@ -74,8 +74,6 @@ const options = [
     value: 'sam',
     label: 'sam',
 
-<<<<<<< HEAD
-=======
   },
   {
     value: 'manyi',
@@ -85,7 +83,6 @@ const options = [
 */
 
 
->>>>>>> 9844886debcc36689caa4fd0c4f4e744344b8877
 const Sidebar = ({
   travel,
   addToTravel,
