@@ -11,14 +11,17 @@ const Header = ({ signedIn, userName }) => {
 
   return (
     <>
-      <div className="flex bg-blue-300 top-0 fixed w-full overflow-y-hidden z-50 ">
+      <div
+        id="header"
+        className="flex bg-blue-300 top-0 fixed w-full overflow-y-hidden z-50 "
+      >
         <PageHeader
           className={
             "site-page-header font-mono w-1/3 h-20" +
             (signedIn ? " " : " invisible")
           }
-          backIcon={<MenuOutlined />}
-          onBack={() => setVisable(true)}
+          backIcon={null}
+          onBack={() => null}
           title={signedIn ? userName : ""}
         />
         <div className="text-4xl text-center font-bold font-mono mt-4 w-1/3 h-18">
@@ -32,7 +35,7 @@ const Header = ({ signedIn, userName }) => {
         closable={false}
         onClose={onClose}
         visible={visible}
-        getContainer={false}
+        getContainer={document.getElementById("sidebar")}
         style={{ position: "absolute" }}
         width="25%"
       ></Drawer>

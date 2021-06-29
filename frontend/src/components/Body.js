@@ -126,7 +126,7 @@ const Body = ({
   return (
     <div className="mt-24 flex h-screen overflow-y-hidden fixed w-screen">
       <div
-        id="sidebar"
+        id="body"
         className="w-1/4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-300 overflow-y-scroll"
       >
         <Sidebar
