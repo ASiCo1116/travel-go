@@ -124,7 +124,7 @@ const Search = ({
             setCardSpot={setCardSpot}
             setSuggestions={setSuggestions}
           />
-          
+
         </div>
 
         <ComboboxPopover portal={false}>
@@ -147,6 +147,8 @@ const Search = ({
           cardSpot={cardSpot}
           setSuggestions={setSuggestions}
           planName={planName}
+          cleanInput={cleanInput}
+          
         />
       ) : null}
       <div className="flex h-full scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-300 overflow-x-scroll">

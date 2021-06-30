@@ -109,8 +109,29 @@ const CreateTravel = async (NewTravel,user) => {
   
   }
 
+  const DeletePlan = async (TravelName,userName) => {
+
+    try
+    {
+      console.log(TravelName)
+      let PlanName=TravelName[0]
+      console.log(PlanName)
+
+      const {data:{message}} = await instance.post('/api/delete-travelname',{params:{PlanName,userName}});
+      console.log(message)
+      return message 
+    
+      
+    }
+    catch(err)
+    {
+      console.log("error!!",err)
+    }
+  
+  }
+
   
 
 
 
-export {CreateTravel,MutateTravel,QueryTravelDetail,QueryTravelName,CreateUser};
+export {CreateTravel,MutateTravel,QueryTravelDetail,QueryTravelName,CreateUser,DeletePlan};

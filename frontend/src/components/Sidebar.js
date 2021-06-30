@@ -3,6 +3,7 @@ import {
   EditOutlined,
   HomeOutlined,
   EnvironmentOutlined,
+  FileExcelOutlined,
   HistoryOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
@@ -14,6 +15,7 @@ import {
   MutateTravel,
   QueryTravelDetail,
   QueryTravelName,
+  DeletePlan
 } from "../api/api.js";
 import DraggableCard from "./DraggableCard";
 
@@ -81,6 +83,9 @@ const savePlanCreate = async (travel,userName) => {
     
   }
 };
+
+
+
 /*
 const options = [
   {
@@ -94,6 +99,7 @@ const options = [
   },
 ];
 */
+
 
 const Sidebar = ({
   travel,
@@ -160,6 +166,17 @@ const Sidebar = ({
     document.getElementById("DBbutton").style.display = "block";
     setPlanName(value);
     addPlanName(travel,value)
+  };
+
+  const deletePlan = async (planName,userName) => {
+    //console.log("oooo")
+      const res = await DeletePlan(planName,userName);
+      console.log(res);
+      message.success(res);
+      setNewTravel(false);
+      setTravelFromDB(false);
+      setTravel([]);
+    
   };
 
   return (
@@ -229,6 +246,10 @@ const Sidebar = ({
             >
               Save plan
             </Button>
+            <Button icon={<FileExcelOutlined />}  onClick={()=>{deletePlan(planName,userName)}}>
+              Delete Plan
+            </Button>
+            
             </div>
         </div>
       ) : (

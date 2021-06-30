@@ -17,6 +17,7 @@ const InnerCard = ({
   planName,
   setSuggestions,
   suggestions,
+  cleanInput
 }) => {
   const onClickAddTravel = () => {
     console.log("hi");
@@ -26,6 +27,7 @@ const InnerCard = ({
     addToTravel(cardSpot,planName);
     if (cardSpot) setCardSpot(null);
     if (suggestions) setSuggestions([]);
+    cleanInput()
   };
   //console.log("planName",planName);
 

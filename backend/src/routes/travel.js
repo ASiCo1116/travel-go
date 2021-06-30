@@ -262,6 +262,49 @@ router.post('/create-user',async function(req,res){
 })
 
 
+router.post('/delete-travelname',async function(req,res){
+  try{
+    const { params: {PlanName,userName } }=req.body;
+    console.log(PlanName,userName)
+    let existingTravel=await db.TravelModel.findOne({name:PlanName})
+    await db.SpotModel.deleteMany({travel:existingTravel })
+    console.log("delete old spots")
+
+    let user=await db.UserModel.findOne({name:userName })
+    let x =user.travels
+    console.log("travels before splice",x)
+    x.map((item,index,x)=>{
+      let y=JSON.stringify(item)
+      let z=JSON.stringify(existingTravel._id)
+      console.log("item:",y,typeof(y))
+      console.log("existingTravel",z,typeof(z))
+
+      if(y==z)
+      {
+        console.log("hi")
+        x.splice(index,1) 
+      }
+    })
+    console.log("travels after splice",x)
+    await db.UserModel.findOneAndUpdate({name:userName},{travels:x})//重新更新User物件
+
+    await db.TravelModel.findOneAndDelete({name:PlanName})//刪除travel物件
+
+
+    res.json({ message: 'delete success' });
+    
+           
+    }
+    catch(e)
+    {
+      console.log(e)
+      res.json({ message: 'Something went wrong...' });
+    }
+    
+
+})
+
+
 
 
 
