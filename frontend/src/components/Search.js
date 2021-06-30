@@ -117,12 +117,13 @@ const Search = ({
             disabled={!ready}
             placeholder="Search location"
             id="myInput"
+           
           ></ComboboxInput>
 
           <ClearSearchButton
             cleanInput={cleanInput}
             setCardSpot={setCardSpot}
-            setSuggestions={setSuggestions}
+            //setSuggestions={setSuggestions}
           />
 
         </div>
@@ -145,9 +146,10 @@ const Search = ({
           addToTravel={addToTravel}
           setCardSpot={setCardSpot}
           cardSpot={cardSpot}
-          setSuggestions={setSuggestions}
+          //setSuggestions={setSuggestions}
           planName={planName}
           cleanInput={cleanInput}
+          
           
         />
       ) : null}
@@ -160,7 +162,7 @@ const Search = ({
               photoUrl={suggestion.photos[0].getUrl()}
               addToTravel={addToTravel}
               cardSpot={suggestion}
-              setSuggestions={setSuggestions}
+              //setSuggestions={setSuggestions}
               setCardSpot={setCardSpot}
               planName={planName}
             />

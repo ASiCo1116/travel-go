@@ -26,7 +26,7 @@ const InnerCard = ({
 
     addToTravel(cardSpot,planName);
     if (cardSpot) setCardSpot(null);
-    if (suggestions) setSuggestions([]);
+    //if (suggestions) setSuggestions([]);
     cleanInput()
   };
   //console.log("planName",planName);

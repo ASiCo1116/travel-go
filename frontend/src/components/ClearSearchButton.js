@@ -13,7 +13,7 @@ const ClearSearchButton = ({ cleanInput, setCardSpot ,setSuggestions}) => {
         }
 
         setCardSpot(null);
-        setSuggestions([])
+        //setSuggestions([])
         //console.log(cardSpot)
       }}
     >
