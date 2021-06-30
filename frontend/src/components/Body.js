@@ -44,7 +44,7 @@ const Body = ({
   setNewTravel,
   TravelFromDB,
   setTravelFromDB,
-  userName
+  userName,
 }) => {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
@@ -128,7 +128,7 @@ const Body = ({
     <div className="mt-24 flex h-screen overflow-y-hidden fixed w-screen">
       <div
         id="body"
-        className="w-1/4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-300 overflow-y-scroll"
+        className="w-1/3 h-5/6 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-300 overflow-y-scroll"
       >
         <Sidebar
           travel={travel}
@@ -154,7 +154,7 @@ const Body = ({
           userName={userName}
         />
       </div>
-      <div className="w-3/4">
+      <div className="w-2/3">
         {/* <Search
           panTo={panTo}
           placeIDToDetail={placeIDToDetail}

@@ -15,7 +15,7 @@ import {
   MutateTravel,
   QueryTravelDetail,
   QueryTravelName,
-  DeletePlan
+  DeletePlan,
 } from "../api/api.js";
 import DraggableCard from "./DraggableCard";
 
@@ -49,20 +49,18 @@ const onOkTime = (value, dateString) => {
   console.log("onOk: ", value);
 };
 
-const savePlanMutate = async (travel,userName) => {
+const savePlanMutate = async (travel, userName) => {
   //console.log("oooo")
-    console.log(travel);
-    const {res,status} = await MutateTravel(travel,userName);
-    if (status){
-      message.success(res);
-    }
-    else{
-      message.error(res);
-    }
-  
+  console.log(travel);
+  const { res, status } = await MutateTravel(travel, userName);
+  if (status) {
+    message.success(res);
+  } else {
+    message.error(res);
+  }
 };
 
-const savePlanCreate = async (travel,userName) => {
+const savePlanCreate = async (travel, userName) => {
   //console.log("oooo")
   let x = document.getElementById("PlanNameInput");
   console.log(x.value);
@@ -71,20 +69,16 @@ const savePlanCreate = async (travel,userName) => {
   } else {
     console.log(travel);
     //let res = await CreateTravel(travel,userName);
-    const {res,status} = await CreateTravel(travel,userName);
+    const { res, status } = await CreateTravel(travel, userName);
     console.log(res);
     console.log(status);
-    if (status){
+    if (status) {
       message.success(res);
-    }
-    else{
+    } else {
       message.error(res);
     }
-    
   }
 };
-
-
 
 /*
 const options = [
@@ -99,7 +93,6 @@ const options = [
   },
 ];
 */
-
 
 const Sidebar = ({
   travel,
@@ -121,7 +114,7 @@ const Sidebar = ({
   setNewTravel,
   TravelFromDB,
   setTravelFromDB,
-  userName
+  userName,
 }) => {
   const [options, setOptions] = useState([]);
 
@@ -156,27 +149,27 @@ const Sidebar = ({
     setVisable(false);
   };
 
-  const onSelectTravel = async (value) => { //選了travelname之後  把這個travelname set
-   
+  const onSelectTravel = async (value) => {
+    //選了travelname之後  把這個travelname set
+
     console.log(value);
     travel = await QueryTravelDetail(value);
 
     console.log(travel);
     setTravel(travel);
-    document.getElementById("DBbutton").style.display = "block";
+    // document.getElementById("DBbutton").style.display = "block";
     setPlanName(value);
-    addPlanName(travel,value)
+    addPlanName(travel, value);
   };
 
-  const deletePlan = async (planName,userName) => {
+  const deletePlan = async (planName, userName) => {
     //console.log("oooo")
-      const res = await DeletePlan(planName,userName);
-      console.log(res);
-      message.success(res);
-      setNewTravel(false);
-      setTravelFromDB(false);
-      setTravel([]);
-    
+    const res = await DeletePlan(planName, userName);
+    console.log(res);
+    message.success(res);
+    setNewTravel(false);
+    setTravelFromDB(false);
+    setTravel([]);
   };
 
   return (
@@ -203,7 +196,7 @@ const Sidebar = ({
             <Button
               icon={<SaveOutlined />}
               onClick={() => {
-                savePlanCreate(travel,userName);
+                savePlanCreate(travel, userName);
               }}
             >
               Save plan
@@ -222,36 +215,41 @@ const Sidebar = ({
           </div>
         </div>
       ) : TravelFromDB ? (
-        <div>
-            <div className="flex items-center justify-center justify-evenly">
-              <div>
-              <Cascader
-                options={options}
-                placeholder="Please select"
-                onChange={onSelectTravel}
-                allowClear={false}
-              />
-              </div>
-            </div>
+        <>
+          <div className="flex items-center justify-center justify-evenly">
+            <Cascader
+              options={options}
+              placeholder="Please select"
+              onChange={onSelectTravel}
+              allowClear={false}
+            />
+          </div>
 
-            <div className="flex items-center justify-center justify-evenly" id="DBbutton" style={{display: 'none'  }} >
+          <div
+            className="flex items-center justify-center justify-evenly"
+            id="DBbutton"
+          >
             <Button icon={<EnvironmentOutlined />} onClick={showSearchLocation}>
               Add place
             </Button>
             <Button
               icon={<SaveOutlined />}
               onClick={() => {
-                savePlanMutate(travel,userName);
+                savePlanMutate(travel, userName);
               }}
             >
               Save plan
             </Button>
-            <Button icon={<FileExcelOutlined />}  onClick={()=>{deletePlan(planName,userName)}}>
-              Delete Plan
+            <Button
+              icon={<FileExcelOutlined />}
+              onClick={() => {
+                deletePlan(planName, userName);
+              }}
+            >
+              Delete plan
             </Button>
-            
-            </div>
-        </div>
+          </div>
+        </>
       ) : (
         <div className="flex items-center justify-center justify-evenly">
           <Button
